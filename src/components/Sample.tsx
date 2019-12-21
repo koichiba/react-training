@@ -1,13 +1,7 @@
-import React, {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  Suspense,
-  lazy
-} from "react";
-import EventList from "./components/EventList";
+import React, { Suspense } from "react";
+import EventList from "./EventList";
 
-const App: React.FC = () => {
+const Sample: React.FC = () => {
   return (
     <div className="App">
       <EventList />
@@ -23,4 +17,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Sample;
