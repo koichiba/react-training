@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-// interface EventListProps {
-//   events: object[];
-// }
-const EventList: React.FC = () => {
-  let [events, setEvent] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:3001/events")
-      .then(response => {
-        return response.json();
-      })
-      .then(res => {
-        setEvent(res.map((c: any) => c));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [setEvent]);
-  console.log(events);
+interface EventListProps {
+  events: object[];
+  activeEventIndex: number;
+}
+const EventList: React.FC<EventListProps> = ({ events, activeEventIndex }) => {
   if (events.length === 0) {
     return <span>Please wait...</span>;
   }
