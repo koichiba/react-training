@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CreateButton: React.FC = () => {
   return (
@@ -11,35 +11,34 @@ const CreateButton: React.FC = () => {
 interface EditButton {}
 const EditButton: React.FC<EditButton> = () => {
   function updateEvent() {}
-  return (
-    <div className="button-area">
-      <button onClick={() => updateEvent()}>イベント更新</button>
-    </div>
-  );
+  return <div className="button-area"></div>;
 };
 
 interface EventInputFormProps {
-  event: {
-    id?: number;
-    name?: string;
+  event?: {
+    id: number;
+    name: string;
   };
 }
 const EventInputForm: React.FC<EventInputFormProps> = ({ event }) => {
-  let [name, setName] = useState();
-  let [test, setTest] = useState();
-  console.log(event);
+  const [test, setTest] = useState();
+
+  const changeHandle = (e: any) => {
+    setTest(e.target.value);
+  };
+
+  if (event === undefined) {
+    return <></>;
+  }
+
   return (
     <>
       <div>
         <input
           type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <input
-          type="text"
+          defaultValue={event.name}
           value={test}
-          onChange={e => setTest(e.target.value)}
+          onChange={e => changeHandle(e)}
         />
       </div>
       <div></div>
