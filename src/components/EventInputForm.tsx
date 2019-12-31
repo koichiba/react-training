@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import EventIndexContext from "./context/EventIndexContext";
 
 const CreateButton: React.FC = () => {
   return (
@@ -13,7 +14,6 @@ const EditButton: React.FC<EditButton> = () => {
   function updateEvent() {}
   return <div className="button-area"></div>;
 };
-
 interface EventInputFormProps {
   event?: {
     id: number;
@@ -21,25 +21,23 @@ interface EventInputFormProps {
   };
 }
 const EventInputForm: React.FC<EventInputFormProps> = ({ event }) => {
-  const [test, setTest] = useState();
+  const [data, setData] = useState({});
+  console.log(event);
+  useEffect(() => {
+    // setData(event);
+  }, [setData]);
+  if (event === undefined) {
+    return null;
+  }
 
   const changeHandle = (e: any) => {
-    setTest(e.target.value);
+    // event.name = e.target.value;
   };
-
-  if (event === undefined) {
-    return <></>;
-  }
 
   return (
     <>
       <div>
-        <input
-          type="text"
-          defaultValue={event.name}
-          value={test}
-          onChange={e => changeHandle(e)}
-        />
+        <input type="text" onChange={e => changeHandle(e)} />
       </div>
       <div></div>
       {event ? <EditButton /> : <CreateButton />}

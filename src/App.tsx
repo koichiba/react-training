@@ -1,6 +1,8 @@
 import React, { useState, useEffect, createContext } from "react";
 import EventList from "./components/EventList";
 import EventFormArea from "./components/EventFormArea";
+import EventInputFrom from "./components/EventInputForm";
+
 import EventIndexContext from "./components/context/EventIndexContext";
 
 const App: React.FC = () => {
@@ -21,18 +23,19 @@ const App: React.FC = () => {
   }, [setEvent]);
 
   const changeEventIndex = (e: any) => {
-    // console.log(e);
-    setActiveEventIndex(activeEventIndex + e);
+    setActiveEventIndex(e);
   };
+
   return (
     <div className="App">
       <EventIndexContext.Provider
         value={{
-          changeEventIndex: (index: number) => changeEventIndex(index)
+          changeEventIndex: (index: number) => changeEventIndex(index),
+          events: events
         }}
       >
-        <EventList events={events} activeEventIndex={activeEventIndex} />
-        <EventFormArea events={events} />
+        <EventList />
+        <EventInputFrom event={events[activeEventIndex]} />
       </EventIndexContext.Provider>
     </div>
   );

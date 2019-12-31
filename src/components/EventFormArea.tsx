@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import EventInputForm from "./EventInputForm";
+import EventIndexContext from "./context/EventIndexContext";
 
 interface Props {
-  events: any[];
+  activeEventIndex: number;
 }
-const EventFormArea: React.FC<Props> = ({ events }) => {
+const EventFormArea: React.FC<Props> = ({ activeEventIndex }) => {
+  const { events } = useContext(EventIndexContext);
   return (
     <>
       {events.map((r: any, i: number) => {
-        return <EventInputForm key={r.id} event={events[i]} />;
+        return <EventInputForm key={r.id} />;
       })}
     </>
   );

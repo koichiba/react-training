@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import EventIndexContext from "./context/EventIndexContext";
 
 interface EventListProps {
-  events: object[];
-  activeEventIndex: number;
+  // events: object[];
 }
-const EventList: React.FC<EventListProps> = ({ events, activeEventIndex }) => {
-  const { changeEventIndex } = useContext(EventIndexContext);
+const EventList: React.FC<EventListProps> = () => {
+  const { changeEventIndex, events } = useContext(EventIndexContext);
   if (events.length === 0) {
     return <span>Please wait...</span>;
   }
