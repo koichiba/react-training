@@ -26,6 +26,10 @@ const App: React.FC = () => {
     setActiveEventIndex(e);
   };
 
+  if (events.length === 0) {
+    return <span>Please wait...</span>;
+  }
+
   return (
     <div className="App">
       <EventIndexContext.Provider
@@ -35,7 +39,8 @@ const App: React.FC = () => {
         }}
       >
         <EventList />
-        <EventInputFrom event={events[activeEventIndex]} />
+        <EventInputFrom event={events[0]} />
+        <EventInputFrom event={events[1]} />
       </EventIndexContext.Provider>
     </div>
   );

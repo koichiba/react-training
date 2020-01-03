@@ -12,34 +12,46 @@ const CreateButton: React.FC = () => {
 interface EditButton {}
 const EditButton: React.FC<EditButton> = () => {
   function updateEvent() {}
-  return <div className="button-area"></div>;
+  return (
+    <div className="button-area">
+      <button>イベント更新</button>
+    </div>
+  );
 };
 interface EventInputFormProps {
-  event?: {
+  event: {
     id: number;
     name: string;
   };
 }
 const EventInputForm: React.FC<EventInputFormProps> = ({ event }) => {
-  const [data, setData] = useState({});
-  console.log(event);
+  const [data, setData] = useState("a");
+  const [name, setName] = useState("");
   useEffect(() => {
-    // setData(event);
-  }, [setData]);
-  if (event === undefined) {
+    setName(event.name);
+  }, [event]);
+
+  if (!data) {
     return null;
   }
 
   const changeHandle = (e: any) => {
-    // event.name = e.target.value;
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.value);
+    // setName(e.target.value);
   };
 
   return (
     <>
       <div>
-        <input type="text" onChange={e => changeHandle(e)} />
+        <input
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+        <input type="submit" value="送信" />
       </div>
-      <div></div>
       {event ? <EditButton /> : <CreateButton />}
     </>
   );

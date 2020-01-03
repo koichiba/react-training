@@ -7,13 +7,7 @@ interface Props {
 }
 const EventFormArea: React.FC<Props> = ({ activeEventIndex }) => {
   const { events } = useContext(EventIndexContext);
-  return (
-    <>
-      {events.map((r: any, i: number) => {
-        return <EventInputForm key={r.id} />;
-      })}
-    </>
-  );
+  return <></>;
 };
 
 export default EventFormArea;
