@@ -39,8 +39,11 @@ const App: React.FC = () => {
         }}
       >
         <EventList />
-        <EventInputFrom event={events[0]} />
-        <EventInputFrom event={events[1]} />
+        {events.map((event: any, index: number) => {
+          if (index === activeEventIndex) {
+            return <EventInputFrom event={event} />;
+          }
+        })}
       </EventIndexContext.Provider>
     </div>
   );
