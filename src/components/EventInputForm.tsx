@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import EventIndexContext from "./context/EventIndexContext";
+import styled from "styled-components";
 
 const CreateButton: React.FC = () => {
   return (
@@ -18,13 +19,23 @@ const EditButton: React.FC<EditButton> = () => {
     </div>
   );
 };
+
+// style
+const ActiveDiv = styled.div`
+  background-color: "red";
+`;
+const EventInput = styled.input`
+  border: 5px solid;
+`;
+
 interface EventInputFormProps {
   event: {
     id: number;
     name: string;
   };
+  isShow: boolean;
 }
-const EventInputForm: React.FC<EventInputFormProps> = ({ event }) => {
+const EventInputForm: React.FC<EventInputFormProps> = ({ event, isShow }) => {
   const [data, setData] = useState("a");
   const [name, setName] = useState("");
   useEffect(() => {
@@ -32,6 +43,9 @@ const EventInputForm: React.FC<EventInputFormProps> = ({ event }) => {
   }, [event]);
 
   if (!data) {
+    return null;
+  }
+  if (!isShow) {
     return null;
   }
 
@@ -44,14 +58,14 @@ const EventInputForm: React.FC<EventInputFormProps> = ({ event }) => {
 
   return (
     <>
-      <div>
-        <input
+      <ActiveDiv>
+        <EventInput
           type="text"
           value={name}
           onChange={e => setName(e.target.value)}
         />
         <input type="submit" value="送信" />
-      </div>
+      </ActiveDiv>
       {event ? <EditButton /> : <CreateButton />}
     </>
   );
