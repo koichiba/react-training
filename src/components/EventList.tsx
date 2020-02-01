@@ -1,6 +1,20 @@
 import React, { useContext } from "react";
 import EventIndexContext from "./context/EventIndexContext";
 
+interface CreateEventItemProps {
+  eventLendth: number;
+}
+const CreateEventItem: React.FC<CreateEventItemProps> = ({ eventLendth }) => {
+  if (eventLendth === 3) {
+    return null;
+  }
+  return (
+    <div className="event-item">
+      <span>作成</span>
+    </div>
+  );
+};
+
 interface EventListProps {
   // events: object[];
 }
@@ -13,7 +27,6 @@ const EventList: React.FC<EventListProps> = () => {
   const setIndex = (e: any) => {
     changeEventIndex(e);
   };
-
   return (
     <div className="event-list">
       {events.map((event: any, index: number) => (
@@ -25,6 +38,7 @@ const EventList: React.FC<EventListProps> = () => {
           {event.name}
         </div>
       ))}
+      <CreateEventItem eventLendth={events.length} />
     </div>
   );
 };

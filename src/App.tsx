@@ -1,53 +1,25 @@
 import React, { useState, useEffect, createContext } from "react";
-import EventList from "./components/EventList";
-import EventFormArea from "./components/EventFormArea";
-import EventInputFrom from "./components/EventInputForm";
-
-import EventIndexContext from "./components/context/EventIndexContext";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import EventTop from "./components/EventTop";
+import Login from "./Login";
+import Auth from "./components/Auth";
 
 const App: React.FC = () => {
-  let [events, setEvent] = useState([]);
-  let [activeEventIndex, setActiveEventIndex] = useState(0);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/events")
-      .then(response => {
-        return response.json();
-      })
-      .then(res => {
-        setEvent(res);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [setEvent]);
-
-  const changeEventIndex = (e: any) => {
-    setActiveEventIndex(e);
-  };
-
-  if (events.length === 0) {
-    return <span>Please wait...</span>;
-  }
-
   return (
-    <div className="App">
-      <EventIndexContext.Provider
-        value={{
-          changeEventIndex: (index: number) => changeEventIndex(index),
-          events: events
-        }}
-      >
-        <EventList />
-        {events.map((event: any, index: number) => (
-          <EventInputFrom
-            event={event}
-            isShow={index === activeEventIndex}
-            key={index}
-          />
-        ))}
-      </EventIndexContext.Provider>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Auth>
+            <Switch>
+              <EventTop />
+            </Switch>
+          </Auth>
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
