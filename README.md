@@ -30,3 +30,16 @@ vi .env
 // 参考サイト：https://qiita.com/kite_999/items/bddd62c395f260e745bc
 REACT_APP_GOOGLE_CLIENT_ID=
 ```
+
+## usage
+
+Api ができるまで下記コードを同時に起動する必要がある
+
+```
+// db.jsonのデータをモックで使用することができる
+yarn serve
+```
+
+```
+yarn start
+```
