@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
-import EventIndexContext from "./context/EventIndexContext";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // style
@@ -26,12 +25,6 @@ const EventInputForm: React.FC<EventInputFormProps> = ({ event, isShow }) => {
   if (!isShow) {
     return null;
   }
-
-  const changeHandle = (e: any) => {
-    console.log(e);
-    console.log(e.target);
-    console.log(e.target.value);
-  };
 
   const createEvent = () => {
     fetch("http://localhost:3001/events", {
